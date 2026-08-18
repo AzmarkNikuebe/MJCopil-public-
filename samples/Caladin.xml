@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='utf-8'?>
+<builder>
+
+<confLang>0</confLang>
+
+<character>
+<race>Humain</race>
+<class>Druide</class>
+<level>1</level>
+<background>Charlatan</background>
+
+<str>10</str>
+<dex>10</dex>
+<con>10</con>
+<int>10</int>
+<wis>10</wis>
+<cha>10</cha>
+
+<lvl lvl="1"><hp_brut>8</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="2"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="3"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="4"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="5"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="6"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="7"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="8"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="9"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="10"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="11"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="12"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="13"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="14"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="15"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="16"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="17"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="18"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="19"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+<lvl lvl="20"><hp_brut>0</hp_brut><aug_carac0>-1</aug_carac0><aug_carac1>-1</aug_carac1><aug_carac2>-1</aug_carac2></lvl>
+
+<raceCustom />
+<styleCombat1 />
+<styleCombat2 />
+<favoredEnemy0 />
+<favoredEnemy6 />
+<favoredEnemy14 />
+<pack>6</pack>
+<backSpe>Je convaincs les gens qu'une camelote sans valeur vaut largement l'argent qu'ils ont obtenu en travaillant durement</backSpe>
+
+<skillsProf id="0" />
+<skillsProf id="1">4,11</skillsProf>
+<skillsProf id="2">5,17</skillsProf>
+<skillsProf id="3" />
+<toolsProf id="0" />
+<toolsProf id="1">kit d'herboriste</toolsProf>
+<toolsProf id="2">kit de contrefaçon, kit de déguisement</toolsProf>
+<toolsProf id="3" />
+<languages id="0">commun,elfique</languages>
+<languages id="1" />
+<languages id="2" />
+<languages id="3" />
+
+<knownSpell lvl="0">druidisme</knownSpell>
+<knownSpell lvl="0" />
+<knownSpell lvl="1">lien avec une bête</knownSpell>
+<knownSpell lvl="1">communication avec les animaux</knownSpell>
+<knownSpell lvl="1">amitié avec les animaux</knownSpell>
+<knownSpell lvl="1" />
+<knownSpell lvl="1" />
+<knownSpell lvl="1" />
+<knownSpell lvl="1" />
+<knownSpell lvl="1" />
+<knownSpell lvl="1" />
+<knownSpell lvl="1" />
+<knownSpell lvl="1" />
+
+<gp>1</gp>
+<pp>0</pp>
+<ep>0</ep>
+<sp>0</sp>
+<cp>0</cp>
+
+<armor>0</armor>
+<shield>1</shield>
+<weapon>2</weapon>
+<weaponQ>1</weaponQ>
+<tools>17,3</tools>
+
+<item>35,80,81,38,5,90,76,39,17,94</item>
+<itemQ>1,1,1,1,1,10,10,1,1,1</itemQ>
+<itemX>outils d'escroquerie, bourse</itemX>
+<name>Caladin</name>
+<sexe>0</sexe>
+<age>30</age>
+<height>1,75 m</height>
+<weight>60 kg</weight>
+<alignment>8</alignment>
+<xp />
+<eyes>Noir</eyes>
+<skin>Noir</skin>
+<hair>Court (noir)</hair>
+
+<appearance>C'est un clochard, il pue
+Son chien lui est majestueux genre tout l'opposé de mon clodo </appearance>
+<traits>Méprisable, Fourbe, </traits>
+<ideals>Prendre l'argent d'autrui </ideals>
+<bonds>Kiki</bonds>
+<flaws>Il pue et il est sale</flaws>
+
+<backstory>C'est Caladin il a pas d'histoire particulière il a toujours vécu à la rue il aime pas les gens, il préfère les escroquer. Dans le village on l'appelle le clodo au chien.
+Un jour il a recueilli kiki son fidèle toutou, kiki est pas comme Caladin kiki lui est propre, il mange pas de la merde, il sent toujours bon, la seule chose qu'il partage avec son maître c'est son mépris pour les gens. Il pisse toujours sur les chaussures des gens
+Kiki et Caladin ils aiment l'argent le problème c'est qu'ils en ont pas...
+</backstory>
+<allies>Kiki</allies>
+<features />
+<treasure />
+
+</character>
+</builder>

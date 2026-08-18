@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MJ Copilot V2 - Assistant JDR & Second Cerveau</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body class="theme-sombre">
+
+  <!-- Main View Container -->
+  <div class="app-layout-v2" id="mj-main-layout">
+    
+    <!-- 1. Top Header Bar -->
+    <header class="layout-header">
+      <div style="display:flex; align-items:center; gap:15px;">
+        <div style="font-size:1.5rem;">🎲</div>
+        <div>
+          <h1 id="header-campaign-title" style="font-family:var(--font-title); font-size:1.15rem; font-weight:700; margin:0; color:#fff;">Nouvelle Campagne</h1>
+          <span style="font-size:0.7rem; color:var(--text-dim);" id="header-visual-style">Style : Fantasy</span>
+        </div>
+      </div>
+      
+      <!-- Theme Selection & Action Buttons -->
+      <div style="display:flex; align-items:center; gap:10px;">
+        <!-- Theme Switcher -->
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span style="font-size:0.75rem; color:var(--text-muted);">Thème :</span>
+          <select id="theme-select" style="padding:4px; font-size:0.75rem; border-radius:4px;" onchange="window.SettingsEngine.setTheme(this.value)">
+            <option value="sombre">Sombre (Néon)</option>
+            <option value="clair">Clair (Épuré)</option>
+            <option value="parchemin">Parchemin (JDR)</option>
+          </select>
+        </div>
+
+        <button class="btn btn-secondary" onclick="document.getElementById('ai-config-modal').classList.add('active'); if(window.refreshOllamaUI) window.refreshOllamaUI(true);" style="padding:5px 10px; font-size:0.75rem;">⚙️ Config IA</button>
+        <button class="btn btn-secondary" onclick="document.getElementById('import-codex-modal').classList.add('active')" style="padding:5px 10px; font-size:0.75rem;">📥 Import</button>
+        <button class="btn btn-secondary" onclick="window.CampaignEngine.exportCampaignJSON()" style="padding:5px 10px; font-size:0.75rem;">📤 Export Base</button>
+        <button class="btn btn-primary" id="btn-open-player" style="padding:5px 12px; font-size:0.75rem;">🖥️ Écran Joueur</button>
+      </div>
+    </header>
+
+
+    <!-- 3. Center Column: Game Dashboard & AI -->
+    <main class="col-center" style="display:flex; flex-direction:column; height:100%; overflow:hidden;">
+      
+      <!-- Center Column Tabs -->
+      <div class="center-tabs" style="display:grid; grid-template-columns: repeat(5, 1fr); gap:6px; margin-bottom:8px; flex-shrink:0;">
+        <button class="btn btn-secondary center-tab-btn active" id="btn-center-tab-game" onclick="window.switchCenterTab('game')" style="font-size:0.8rem; padding:8px; font-weight:700;">✏️ Partie</button>
+        <button class="btn btn-secondary center-tab-btn" id="btn-center-tab-map" onclick="window.switchCenterTab('map')" style="font-size:0.8rem; padding:8px; font-weight:700;">🌍 VTT</button>
+        <button class="btn btn-secondary center-tab-btn" id="btn-center-tab-combat" onclick="window.switchCenterTab('combat')" style="font-size:0.8rem; padding:8px; font-weight:700;">⚔️ Combat</button>
+        <button class="btn btn-secondary center-tab-btn" id="btn-center-tab-lore" onclick="window.switchCenterTab('lore')" style="font-size:0.8rem; padding:8px; font-weight:700;">📜 Lore & Hist</button>
+        <button class="btn btn-secondary center-tab-btn" id="btn-center-tab-encyclo" onclick="window.switchCenterTab('encyclo')" style="font-size:0.8rem; padding:8px; font-weight:700;">📚 Encyclopédie</button>
+      </div>
+
+      <!-- Tab 1: Game & Journal Content -->
+      <div id="center-tab-game-content" style="display:flex; flex-direction:column; gap:12px; flex:1; overflow-y:auto; padding-right:4px;">
+        
+        <!-- Session Control Card -->
+        <div class="glass-panel card" id="session-control-card" style="padding:12px; min-height:110px; flex-shrink:0;">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Live Log / Session Journal -->
+        <div class="glass-panel card" style="flex:1 0 350px; display:flex; flex-direction:column; padding:12px; overflow:hidden;">
+          <h3 class="card-title" style="margin-bottom:8px; font-size:0.85rem;">✏️ Journal & Événements</h3>
+          
+          <!-- Saisie Rapide + Vocal -->
+          <div style="display:flex; flex-direction:column; gap:8px; border-bottom:1px solid var(--glass-border); padding-bottom:10px; margin-bottom:10px;">
+            <div style="display:flex; gap:6px; align-items:center;">
+              <input type="text" id="quick-note-input" placeholder="Notes brutes rapides..." style="flex:1; padding:6px; font-size:0.82rem;">
+              <button class="btn btn-secondary" id="btn-voice-input" onclick="window.EventEngine.toggleSpeechRecognition()" style="padding:5px 10px; font-size:0.82rem;" title="Dictée Vocale (Speech-to-Text)">🎙️</button>
+              <button class="btn btn-primary" id="btn-reformulate-note" onclick="window.EventEngine.reformulateQuickNote()" style="padding:5px 12px; font-size:0.82rem; background:rgba(157,78,221,0.2);">🤖 Reformuler</button>
+            </div>
+            <!-- Preview Box -->
+            <div id="reformulated-preview-box" style="display:none; background:rgba(157, 78, 221, 0.08); border:1px dashed rgba(157,78,221,0.3); padding:8px; border-radius:6px; flex-direction:column; gap:6px;">
+              <span style="font-size:0.7rem; color:var(--color-primary); font-weight:700;">PROPOSITION COPI-LOG :</span>
+              <textarea id="reformulated-text" rows="2" style="width:100%; font-size:0.8rem; background:transparent; border:none; color:#fff; resize:vertical; padding:0;"></textarea>
+              <div style="display:flex; justify-content:flex-end; gap:6px;">
+                <button class="btn btn-secondary" style="padding:2px 8px; font-size:0.7rem;" onclick="document.getElementById('reformulated-preview-box').style.display='none'">Ignorer</button>
+                <button class="btn btn-primary" style="padding:2px 8px; font-size:0.7rem;" onclick="window.EventEngine.integrateReformulatedNote(document.getElementById('reformulated-text').value)">Ajouter au Journal</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Manual Event Form -->
+          <details style="margin-bottom:10px; border-bottom:1px solid var(--glass-border); padding-bottom:8px;">
+            <summary style="font-size:0.75rem; color:var(--text-muted); cursor:pointer; font-weight:700;">➕ Ajouter manuellement un événement typé</summary>
+            <form id="form-add-event" style="display:flex; flex-direction:column; gap:8px; margin-top:8px;" onsubmit="window.EventEngine.handleSessionEventAdd(event)">
+              <div style="display:grid; grid-template-columns: 1fr 120px; gap:8px;">
+                <input type="text" id="event-title" placeholder="Titre (ex: Embuscade)" required style="padding:4px;">
+                <select id="event-type" style="padding:4px; font-size:0.75rem;">
+                  <option value="exploration">🧭 Déplacement</option>
+                  <option value="combat">⚔️ Combat</option>
+                  <option value="dialogue">💬 Rencontre PNJ</option>
+                  <option value="decouverte">🔑 Découverte</option>
+                </select>
+              </div>
+              <textarea id="event-desc" placeholder="Que s'est-il passé ?" rows="2" required style="padding:4px; font-size:0.75rem; width:100%; box-sizing:border-box;"></textarea>
+              <button type="submit" class="btn btn-primary" style="align-self:flex-end; padding:4px 10px; font-size:0.72rem;">Consigner</button>
+            </form>
+          </details>
+
+          <!-- Session Logs List -->
+          <div id="session-logs-list" style="flex:1; overflow-y:auto; display:flex; flex-direction:column; gap:6px;">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- AI Consequence Engine Block -->
+        <div class="glass-panel card" style="padding:12px; display:flex; flex-direction:column; gap:10px; flex-shrink:0;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h3 class="card-title" style="margin:0; font-size:0.85rem;">🧠 Conséquences Projetées par l'IA</h3>
+            <button class="btn btn-secondary" id="btn-analyze-consequences" onclick="window.EventEngine.analyzeConsequences()" style="padding:3px 10px; font-size:0.75rem;">🤖 Analyser Séance</button>
+          </div>
+          
+          <div id="consequences-proposed-container" style="display:flex; flex-direction:column; gap:6px; max-height: 80px; overflow-y:auto;">
+            <div style="text-align:center; padding:10px; color:var(--text-dim); font-size:0.75rem;">Lancez l'analyse pour projeter les changements du monde.</div>
+          </div>
+
+          <button class="btn btn-primary" id="btn-apply-consequences" onclick="window.EventEngine.applyConsequences()" style="display:none; width:100%; padding:6px; font-size:0.78rem; font-weight:700;">Appliquer les conséquences au Codex</button>
+        </div>
+
+        <!-- AIAssistantDock collapsible chat panel -->
+        <div class="glass-panel card" style="padding:10px 12px; display:flex; flex-direction:column; gap:8px; flex-shrink:0;">
+          <details>
+            <summary style="font-size:0.8rem; color:#ffd166; font-weight:700; cursor:pointer;">🧙 Assistant Copilote (Console d'improvisation)</summary>
+            
+            <!-- Skills Shelf (Specialized prompts) -->
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px; margin-bottom:4px;">
+              <span style="font-size:0.7rem; color:var(--color-primary); font-weight:700;">🎯 SPÉCIALISATION / SKILL :</span>
+            </div>
+            <div id="ai-skills-shelf" style="display:flex; flex-wrap:wrap; gap:4px; margin-bottom:8px;">
+              <!-- Populated dynamically by SkillsEngine.js -->
+            </div>
+
+            <!-- Quick Actions Shelf -->
+            <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:6px; margin-bottom:8px;">
+              <button class="btn btn-secondary" onclick="window.AIAssistantEngine.triggerQuickPrompt('bloque')" style="font-size:0.65rem; padding:4px;">💡 Bloqué</button>
+              <button class="btn btn-secondary" onclick="window.AIAssistantEngine.triggerQuickPrompt('reaction')" style="font-size:0.65rem; padding:4px;">💬 Réaction</button>
+              <button class="btn btn-secondary" onclick="window.AIAssistantEngine.triggerQuickPrompt('situation')" style="font-size:0.65rem; padding:4px;">🧩 Résumé</button>
+              <button class="btn btn-secondary" onclick="window.AIAssistantEngine.triggerQuickPrompt('scenario')" style="font-size:0.65rem; padding:4px;">🎯 Rencontre</button>
+            </div>
+
+            <!-- Chat logs area -->
+            <div id="ai-chat-area" style="height:150px; overflow-y:auto; display:flex; flex-direction:column; gap:8px; border:1px solid var(--glass-border); padding:8px; border-radius:6px; margin-bottom:8px; background:rgba(0,0,0,0.25);">
+              <div class="chat-bubble system" style="font-size:0.78rem;">
+                Le copilote a accès à votre base de données locale. Posez une question ou cliquez sur un raccourci d'improvisation rapide.
+              </div>
+            </div>
+
+            <!-- Input bar -->
+            <div style="display:flex; gap:6px;">
+              <input type="text" id="ai-chat-input" placeholder="Poser une question à l'IA..." style="flex:1; padding:6px; font-size:0.8rem;" onkeydown="if(event.key==='Enter') window.AIAssistantEngine.handleUserChatMessage()">
+              <button class="btn btn-primary" id="ai-chat-send" onclick="window.AIAssistantEngine.handleUserChatMessage()" style="padding:6px 12px; font-size:0.8rem;">➔</button>
+            </div>
+          </details>
+        </div>
+
+      </div>
+
+      <!-- Tab 2: Tactical Map Content -->
+      <div id="center-tab-map-content" class="map-dock" style="display:none; flex-direction:column; gap:10px; flex:1; overflow:hidden; height:100%;">
+        <div id="map-viewport-container" style="flex:1; display:flex; flex-direction:column; overflow:hidden;">
+          <!-- Populated dynamically by ContextMapEngine -->
+        </div>
+      </div>
+
+      <!-- Tab 3: Combat Tracker Content -->
+      <div id="center-tab-combat-content" style="display:none; flex-direction:column; gap:10px; flex:1; overflow:hidden;">
+        
+        <!-- Combat Controls Header -->
+        <div class="glass-panel" style="padding:10px 14px; display:flex; justify-content:space-between; align-items:center; flex-shrink:0; border: 1px solid rgba(157,78,221,0.2);">
+          <div style="display:flex; align-items:center; gap:10px;">
+            <span style="font-size:1.1rem;">⚔️</span>
+            <strong id="combat-round-counter" style="color:var(--color-secondary); font-size:1rem; font-family:var(--font-title);">En attente...</strong>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-secondary" id="combat-next-turn-btn" onclick="window.CombatEngine.nextTurn()" style="padding:6px 12px; font-size:0.8rem; font-weight:bold;" disabled>Tour Suivant ➔</button>
+            <button class="btn btn-danger" id="combat-end-btn" onclick="window.CombatEngine.endCombat()" style="padding:6px 12px; font-size:0.8rem; font-weight:bold; display:none; background:rgba(220,53,69,0.2); border-color:#dc3545; color:#ff6b6b;">Fin de Combat</button>
+            <button class="btn btn-primary" id="combat-start-btn" onclick="window.CombatEngine.startCombat()" style="padding:6px 12px; font-size:0.8rem; font-weight:bold;">Lancer le Combat</button>
+          </div>
+        </div>
+
+        <!-- Double Column Grid -->
+        <div style="display:grid; grid-template-columns: 1fr 260px; gap:10px; flex:1; overflow:hidden;">
+          
+          <!-- Left Column: Initiative List -->
+          <div class="glass-panel" ondragover="window.CombatEngine.handleDragOver(event)" ondrop="window.CombatEngine.handleDrop(event)" style="padding:12px; display:flex; flex-direction:column; gap:8px; overflow-y:auto; background:rgba(0,0,0,0.25);">
+            <h3 style="font-size:0.85rem; color:#fff; border-bottom:1px solid rgba(255,255,255,0.08); padding-bottom:6px; margin:0;">📋 Suivi d'Initiative</h3>
+            <div id="combat-initiative-list" style="flex:1;">
+              <!-- Populated dynamically by CombatEngine.js -->
+            </div>
+          </div>
+
+          <!-- Right Column: Add participant & AI advice -->
+          <div style="display:flex; flex-direction:column; gap:10px; overflow-y:auto;">
+            
+            <!-- Quick Add Codex -->
+            <div class="glass-panel" style="padding:10px; display:flex; flex-direction:column; gap:8px;">
+              <h4 style="font-size:0.78rem; color:#fff; margin:0;">📥 Ajouter du Codex</h4>
+              <div style="display:grid; grid-template-columns: 1fr 35px; gap:6px;">
+                <select id="combat-add-codex-select" style="padding:4px; font-size:0.75rem; width:100%; box-sizing:border-box; min-width:0;">
+                  <!-- Filled dynamically -->
+                </select>
+                <button class="btn btn-secondary" onclick="window.CombatEngine.addCodexParticipant()" style="padding:4px 0; font-size:0.75rem; text-align:center; width:100%;">+</button>
+              </div>
+            </div>
+
+            <!-- Custom Add Form -->
+            <div class="glass-panel" style="padding:10px; display:flex; flex-direction:column; gap:6px;">
+              <h4 style="font-size:0.78rem; color:#fff; margin:0;">➕ Créature personnalisée</h4>
+              <input type="text" id="combat-add-name" placeholder="Nom du monstre..." style="padding:4px 6px; font-size:0.75rem; width:100%;">
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap:6px;">
+                <div style="display:flex; flex-direction:column; gap:2px;">
+                  <label style="font-size:0.6rem; color:var(--text-muted);">PV Max</label>
+                  <input type="number" id="combat-add-hp" value="10" style="padding:3px; font-size:0.75rem;">
+                </div>
+                <div style="display:flex; flex-direction:column; gap:2px;">
+                  <label style="font-size:0.6rem; color:var(--text-muted);">CA</label>
+                  <input type="number" id="combat-add-ca" value="10" style="padding:3px; font-size:0.75rem;">
+                </div>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-top:2px;">
+                <div style="display:flex; flex-direction:column; gap:2px;">
+                  <label style="font-size:0.6rem; color:var(--text-muted);">Initiative (Jet)</label>
+                  <input type="number" id="combat-add-init" value="10" style="padding:3px; font-size:0.75rem; width:80px;">
+                </div>
+                <label style="font-size:0.72rem; color:#fff; display:flex; align-items:center; gap:4px; cursor:pointer;">
+                  <input type="checkbox" id="combat-add-is-player"> Est PJ ?
+                </label>
+              </div>
+              <button class="btn btn-secondary" onclick="window.CombatEngine.addCustomCombatantFromForm()" style="padding:6px; font-size:0.75rem; font-weight:bold; margin-top:4px; width:100%;">Ajouter</button>
+            </div>
+
+            <!-- AI Tactical Assistant Panel -->
+            <div class="glass-panel" style="padding:10px; display:flex; flex-direction:column; gap:8px; flex:1; min-height:160px; background:rgba(157,78,221,0.05); border:1px solid rgba(157,78,221,0.15);">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <h4 style="font-size:0.78rem; color:#fff; margin:0; display:flex; align-items:center; gap:4px;">🔮 Conseil IA Tactique</h4>
+                <button class="btn btn-primary" onclick="window.CombatEngine.getAIAdvice()" style="padding:2px 8px; font-size:0.68rem; background:linear-gradient(90deg, #9d4edd 0%, #7b2cbf 100%);">Demander</button>
+              </div>
+              <div id="combat-ai-advice" style="flex:1; overflow-y:auto; font-size:0.75rem; color:var(--text-muted);">
+                Cliquez sur "Demander" pour que l'IA analyse le tour en cours et suggère des actions tactiques ou des répliques.
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Tab 3: Lore & Histoire Content -->
+      <div id="center-tab-lore-content" style="display:none; flex-direction:column; gap:12px; flex:1; overflow-y:auto; padding:10px;">
+        <div class="glass-panel card" style="padding:15px; display:flex; flex-direction:column; gap:10px;">
+          <h2 style="font-family:var(--font-title); font-size:1.2rem; font-weight:700; color:var(--color-primary);">📜 Synopsis de la Campagne</h2>
+          <p id="lore-campaign-desc" style="font-size:0.9rem; line-height:1.5; color:var(--text-main);">Chargement de l'histoire...</p>
+        </div>
+        <div class="glass-panel card" style="padding:15px; display:flex; flex-direction:column; gap:10px;">
+          <h3 style="font-family:var(--font-title); font-size:1rem; font-weight:700; color:#fff;">Arcs & Chapitres</h3>
+          <div id="lore-arcs-list" style="display:flex; flex-direction:column; gap:8px;">
+            <!-- Populated dynamically by WorldEngine or App.js -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: Encyclopedia Content -->
+      <div id="center-tab-encyclo-content" style="display:none; flex-direction:column; gap:12px; flex:1; overflow:hidden;">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h2 style="font-family:var(--font-title); font-size:1rem; font-weight:700; color:#fff; margin:0;">📚 Encyclopédie</h2>
+          <button class="btn btn-secondary" style="padding:2px 8px; font-size:0.7rem;" onclick="window.WorldEngine.createNewEntityPrompt()">+ Ajouter</button>
+        </div>
+        
+        <!-- Search -->
+        <input type="text" placeholder="Rechercher dans le monde..." oninput="window.WorldEngine.setSearchQuery(this.value)" style="width:100%; padding:6px; font-size:0.8rem; box-sizing:border-box;">
+
+        <!-- Tabs Header -->
+        <div style="display:grid; grid-template-columns: repeat(8, 1fr); gap:4px;">
+          <button class="btn btn-secondary encyclopedia-tab-btn active" data-category="pnj" onclick="window.WorldEngine.changeCategory('pnj')" style="font-size:0.72rem; padding:4px;">👤 PNJ</button>
+          <button class="btn btn-secondary encyclopedia-tab-btn" data-category="lieu" onclick="window.WorldEngine.changeCategory('lieu')" style="font-size:0.72rem; padding:4px;">🗺️ Lieux</button>
+          <button class="btn btn-secondary encyclopedia-tab-btn" data-category="faction" onclick="window.WorldEngine.changeCategory('faction')" style="font-size:0.72rem; padding:4px;">🛡️ Factions</button>
+          <button class="btn btn-secondary encyclopedia-tab-btn" data-category="objet" onclick="window.WorldEngine.changeCategory('objet')" style="font-size:0.72rem; padding:4px;">🎒 Objets</button>
+          <button class="btn btn-secondary encyclopedia-tab-btn" data-category="secret" onclick="window.WorldEngine.changeCategory('secret')" style="font-size:0.72rem; padding:4px;">🔑 Secrets</button>
+          <button class="btn btn-secondary encyclopedia-tab-btn" data-category="bete" onclick="window.WorldEngine.changeCategory('bete')" style="font-size:0.72rem; padding:4px;">🐾 Bêtes</button>
+          <button class="btn btn-secondary encyclopedia-tab-btn" data-category="chrono" onclick="window.WorldEngine.changeCategory('chrono')" style="font-size:0.72rem; padding:4px;">⏳ Chrono</button>
+          <button class="btn btn-secondary encyclopedia-tab-btn" data-category="regles" onclick="window.WorldEngine.changeCategory('regles')" style="font-size:0.72rem; padding:4px;">📖 Règles</button>
+        </div>
+
+        <!-- Entities List Container -->
+        <div id="encyclopedia-list" style="display:flex; flex-direction:column; gap:8px; overflow-y:auto; flex:1;">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+    </main>
+
+    <!-- 4. Right Column: Players & Favorites -->
+    <aside class="col-right">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+        <h2 style="font-family:var(--font-title); font-size:1rem; font-weight:700; color:#fff; margin:0;">🧙 Personnages Joueurs</h2>
+        <div style="display:flex; gap:6px;">
+          <!-- XML Import Trigger -->
+          <label class="btn btn-secondary" style="padding:2px 6px; font-size:0.65rem; cursor:pointer;" title="Importer une fiche XML Caladin/Zozmark">
+            📥 XML
+            <input type="file" id="file-upload-xml" accept=".xml" style="display:none;" onchange="window.CharacterEngine.importPlayerXML(this)">
+          </label>
+          <button class="btn btn-secondary" style="padding:2px 6px; font-size:0.65rem;" onclick="window.CharacterEngine.createNewPlayer()">+ Nouveau</button>
+        </div>
+      </div>
+      
+      <!-- Players list -->
+      <div id="players-list" style="display:flex; flex-direction:column; gap:4px; overflow-y:auto; flex:1;">
+        <!-- Populated dynamically -->
+      </div>
+    </aside>
+
+
+
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="detail-modal" id="detail-modal">
+    <div class="glass-panel detail-content" style="max-width:550px; max-height:85vh; overflow-y:auto;">
+      <div class="detail-header">
+        <h2 id="modal-entity-title" style="font-family:var(--font-title); font-weight:700;">Détails de l'entité</h2>
+        <button class="btn" onclick="document.getElementById('detail-modal').classList.remove('active')" style="padding:4px 8px;">✕</button>
+      </div>
+      <div class="detail-body" id="modal-entity-details">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Player Detailed Modal -->
+  <div class="detail-modal" id="player-modal">
+    <div class="glass-panel detail-content" style="max-width:800px; width:90%; max-height:90vh; overflow-y:auto;">
+      <div class="detail-header">
+        <h2 id="player-modal-title" style="font-family:var(--font-title); font-weight:700;">Fiche de Personnage</h2>
+        <button class="btn" onclick="document.getElementById('player-modal').classList.remove('active')" style="padding:4px 8px;">✕</button>
+      </div>
+      <div class="detail-body" id="player-modal-body">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Icon Picker Modal -->
+  <div class="detail-modal" id="icon-picker-modal">
+    <div class="glass-panel detail-content" style="max-width:550px; max-height:85vh; overflow-y:auto; display:flex; flex-direction:column; gap:12px; padding:15px;">
+      <div class="detail-header" style="display:flex; justify-content:space-between; align-items:center;">
+        <h2 style="font-family:var(--font-title); font-weight:700; margin:0; font-size:1.1rem; color:#fff;">🛡️ Bibliothèque d'icônes</h2>
+        <button class="btn" onclick="document.getElementById('icon-picker-modal').classList.remove('active')" style="padding:4px 8px;">✕</button>
+      </div>
+      
+      <!-- Search -->
+      <div style="display:flex; gap:8px;">
+        <input type="text" id="icon-picker-search" placeholder="Rechercher une icône (ex: sword, shield, dragon...)" style="flex:1; padding:6px; font-size:0.8rem; background:rgba(0,0,0,0.3); border:1px solid var(--glass-border); color:#fff; border-radius:4px;" oninput="window.IconPickerEngine.searchIcons(this.value)">
+      </div>
+      
+      <!-- Grid Container -->
+      <div id="icon-picker-grid" style="display:grid; grid-template-columns: repeat(6, 1fr); gap:8px; max-height:45vh; overflow-y:auto; padding:8px; border:1px solid var(--glass-border); border-radius:6px; background:rgba(0,0,0,0.25);">
+        <!-- Filled dynamically -->
+      </div>
+      
+      <div style="display:flex; justify-content:flex-end; gap:8px; margin-top:8px;">
+        <button class="btn btn-secondary" onclick="document.getElementById('icon-picker-modal').classList.remove('active')">Fermer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Modal (Popup for long responses) -->
+  <div class="detail-modal" id="ai-modal">
+    <div class="glass-panel detail-content" style="max-width:700px; width:85%; max-height:80vh; overflow-y:auto;">
+      <div class="detail-header">
+        <h2 id="ai-modal-title" style="font-family:var(--font-title); font-weight:700; color:#ffd166;">🧙 Assistant Large - Réponses Littéraires</h2>
+        <button class="btn" onclick="document.getElementById('ai-modal').classList.remove('active')" style="padding:4px 8px;">✕</button>
+      </div>
+      <div class="detail-body" id="ai-modal-body" style="font-size:0.9rem; line-height:1.6; color:#fff;">
+        <!-- Text typewrites here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Importer Codex -->
+  <div class="detail-modal" id="import-codex-modal">
+    <div class="glass-panel detail-content" style="max-width: 500px;">
+      <div class="detail-header">
+        <h2 style="font-family: var(--font-title); font-weight:700;">📥 Importer une Campagne</h2>
+        <button class="btn" onclick="document.getElementById('import-codex-modal').classList.remove('active')" style="padding:4px 8px;">✕</button>
+      </div>
+      <div class="detail-body" style="display:flex; flex-direction:column; gap:20px;">
+        
+        <!-- V3 : Generateur IA PDF -->
+        <div style="border:1px dashed var(--color-primary); border-radius:8px; padding:15px; background:rgba(157,78,221,0.05);">
+          <h3 style="color:var(--color-primary); margin-bottom:8px; font-size:1rem;">🤖 Générateur IA depuis PDF (V3)</h3>
+          <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4; margin-bottom:10px;">Le serveur local (Python) va extraire le texte et utiliser l'IA pour générer automatiquement tout le Codex (lieux, pnj, scénario).</p>
+          <input type="file" id="import-file-pdf" accept=".pdf" style="width:100%; padding:8px; background:rgba(0,0,0,0.3); border:1px solid var(--glass-border); color:#fff; border-radius:4px; margin-bottom:10px;">
+          <button class="btn btn-primary" onclick="window.CampaignEngine.generateCodexFromPDF()" style="width:100%; padding:10px; font-weight:bold;">🚀 Analyser et Générer</button>
+          
+          <div id="pdf-loading-indicator" style="display:none; text-align:center; margin-top:10px; font-size:0.8rem; color:var(--color-secondary);">
+            <span style="display:inline-block; animation:pulse 1s infinite;">L'IA analyse le PDF (10s - 30s)...</span>
+          </div>
+        </div>
+
+        <hr style="border:0; border-top:1px solid var(--glass-border);">
+
+        <!-- JSON Classique -->
+        <div>
+          <h3 style="color:#fff; margin-bottom:8px; font-size:0.9rem;">Fichier JSON Classique</h3>
+          <input type="file" id="import-file-uploader" accept=".json" style="width:100%; padding:8px; background:rgba(0,0,0,0.3); border:1px solid var(--glass-border); color:#fff; border-radius:4px; margin-bottom:10px;">
+          <button class="btn btn-secondary" onclick="window.handleCampJsonImport()" style="width:100%; padding:8px;">Confirmer JSON</button>
+        </div>
+
+        <hr style="border:0; border-top:1px solid var(--glass-border);">
+
+        <!-- Génération Pixel Art -->
+        <div>
+          <h3 style="color:#fff; margin-bottom:8px; font-size:0.9rem;">🎨 Jetons Pixel Art (8-bit)</h3>
+          <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.4; margin-bottom:10px;">Génère ou régénère des jetons pixel art 8-bit pour tous les PNJs, objets et monstres du Codex actuel.</p>
+          <button class="btn btn-secondary" id="btn-generate-all-pixelart" onclick="window.CampaignEngine.generateAllPixelArt()" style="width:100%; padding:10px; font-weight:bold;">🎨 Générer les Jetons</button>
+          
+          <div id="pixelart-loading-indicator" style="display:none; text-align:center; margin-top:10px; font-size:0.8rem; color:var(--color-secondary);">
+            <div class="spinner" style="display:inline-block; vertical-align:middle; margin-right:6px; width:14px; height:14px; border:2px solid rgba(255,255,255,0.1); border-top:2px solid var(--color-secondary); border-radius:50%; animation:spin 1s linear infinite;"></div>
+            <span id="pixelart-loading-text">Génération des jetons en cours (1 à 2 min)...</span>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Configuration IA -->
+  <div class="detail-modal" id="ai-config-modal">
+    <div class="glass-panel detail-content" style="max-width:500px; max-height:85vh; overflow-y:auto;">
+      <div class="detail-header">
+        <h2 style="font-family:var(--font-title); font-weight:700;">⚙️ Configurer l'Assistant IA</h2>
+        <button class="btn" onclick="document.getElementById('ai-config-modal').classList.remove('active')" style="padding:4px 8px;">✕</button>
+      </div>
+      <div class="detail-body" style="display:flex; flex-direction:column; gap:12px;">
+        
+        <div class="form-group">
+          <label>Moteur d'IA Actif</label>
+          <select id="config-ai-engine" onchange="window.handleConfigEngineChange(this.value)">
+            <option value="simulation">🎲 Simulateur local (Sans clé)</option>
+            <option value="gemini">✨ Google Gemini API</option>
+            <option value="openai">🤖 OpenAI ChatGPT API</option>
+            <option value="ollama">🦙 Ollama Local</option>
+          </select>
+        </div>
+
+        <!-- Gemini Config fields -->
+        <div id="config-field-gemini" style="display:none; flex-direction:column; gap:10px;">
+          <div class="form-group">
+            <label>Clé API Gemini</label>
+            <input type="password" id="config-key-gemini" placeholder="AIzaSy...">
+          </div>
+          <div class="form-group">
+            <label>Modèle Gemini</label>
+            <select id="config-model-gemini">
+              <option value="gemini-3.5-flash">gemini-3.5-flash (V3 - Très rapide & Conseillé)</option>
+              <option value="gemini-3.1-pro">gemini-3.1-pro (V3 - Très intelligent)</option>
+              <option value="gemini-2.5-flash">gemini-2.5-flash (Standard)</option>
+              <option value="gemini-2.5-pro">gemini-2.5-pro (Raisonnement)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- OpenAI Config fields -->
+        <div id="config-field-openai" style="display:none; flex-direction:column; gap:10px;">
+          <div class="form-group">
+            <label>Clé API OpenAI</label>
+            <input type="password" id="config-key-openai" placeholder="sk-proj-...">
+          </div>
+          <div class="form-group">
+            <label>Modèle OpenAI</label>
+            <select id="config-model-openai">
+              <option value="gpt-4o-mini">gpt-4o-mini (Économique)</option>
+              <option value="gpt-4o">gpt-4o (Créatif)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Ollama Config fields -->
+        <div id="config-field-ollama" style="display:none; flex-direction:column; gap:10px;">
+          <div id="ollama-status-container" style="padding:8px; border-radius:6px; background:rgba(0,0,0,0.25); border:1px solid var(--glass-border); display:flex; justify-content:space-between; align-items:center;">
+            <div id="ollama-status-badge" style="font-size:0.75rem; color:#00f5d4; display:flex; align-items:center; gap:6px;">
+              <span>🟢 Ollama Prêt (Auto-démarrage actif)</span>
+            </div>
+            <button class="btn btn-secondary" onclick="window.refreshOllamaUI()" style="padding:2px 8px; font-size:0.68rem;">🔄 Actualiser</button>
+          </div>
+
+          <div class="form-group">
+            <label>Modèle Ollama Détecté</label>
+            <select id="config-model-ollama-select" onchange="document.getElementById('config-model-ollama').value=this.value" style="width:100%;">
+              <option value="qwen2.5:1.5b" selected>qwen2.5:1.5b (Ultra-rapide & Recommandé ~980 Mo) ⭐</option>
+              <option value="llama3.2:1b">llama3.2:1b (Ultra-léger ~1.3 Go) ⭐</option>
+              <option value="llama3:latest">llama3:latest (8B - Plus lourd)</option>
+              <option value="mistral:latest">mistral:latest (7B - Plus lourd)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Nom manuel du modèle (si non listé)</label>
+            <input type="text" id="config-model-ollama" placeholder="qwen2.5:1.5b" value="qwen2.5:1.5b">
+          </div>
+
+          <div class="form-group">
+            <label>URL Serveur Ollama</label>
+            <input type="text" id="config-url-ollama" value="http://localhost:11434">
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 10px;">
+          <label>Optimisation du Contexte (Énergie/Tokens)</label>
+          <select id="config-ai-context-opt">
+            <option value="standard">Standard (Injecte tout le Codex brute)</option>
+            <option value="optimized">Optimisé (Filtrage de PNJ/Lieux, support Cache)</option>
+            <option value="ultra-light">Ultra-léger pour Ollama (Zéro Markdown, réponses ultra-brèves)</option>
+          </select>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+          <button class="btn btn-primary" onclick="window.handleSaveAIConfig()" style="padding:10px; width: 100%;">Sauvegarder Configuration</button>
+          <a href="test_context_comparison.html" class="btn" style="text-decoration: none; padding: 10px; width: 100%;" target="_blank">📊 Comparateur de Contexte (Diagnostic)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Créer Séance -->
+  <div class="detail-modal" id="create-session-modal">
+    <div class="glass-panel detail-content" style="max-width: 500px;">
+      <div class="detail-header">
+        <h2 style="font-family: var(--font-title); font-weight:700;">➕ Démarrer une Nouvelle Séance</h2>
+        <button class="btn" onclick="document.getElementById('create-session-modal').classList.remove('active')" style="padding:4px 8px;">✕</button>
+      </div>
+      <div class="detail-body">
+        <form id="form-create-session" style="display:flex; flex-direction:column; gap:12px;">
+          <div class="form-group">
+            <label>Titre de la Séance</label>
+            <input type="text" id="new-session-title" placeholder="Ex: Exploration de la Mine" required>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div class="form-group">
+              <label>Date</label>
+              <input type="date" id="new-session-date" required>
+            </div>
+            <div class="form-group">
+              <label>Lieu principal de départ</label>
+              <input type="text" id="new-session-lieu" placeholder="Ex: Mine de Montval">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Lier à un Chapitre</label>
+            <select id="new-session-chapter">
+              <!-- Populated dynamically -->
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" style="margin-top:10px; padding:10px;">Lancer la Séance</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Clôturer Séance -->
+  <div class="detail-modal" id="close-session-modal">
+    <div class="glass-panel detail-content" style="max-width: 600px; max-height:85vh; overflow-y:auto;">
+      <div class="detail-header">
+        <h2 style="font-family: var(--font-title); font-weight:700;">🔒 Clôture & Archiver la Séance</h2>
+        <button class="btn" onclick="document.getElementById('close-session-modal').classList.remove('active')" style="padding:4px 8px;">✕</button>
+      </div>
+      <div class="detail-body" style="display:flex; flex-direction:column; gap:12px;">
+        
+        <div>
+          <span style="font-weight:700; color:var(--text-muted); font-size:0.75rem;">Événements de la séance :</span>
+          <div id="close-session-events-preview" style="margin-top:6px; max-height:120px; overflow-y:auto; background:rgba(0,0,0,0.25); padding:8px; border-radius:4px; box-sizing:border-box;">
+            <!-- Dynamic -->
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+            <label style="margin-bottom:0;">Résumé Narratif Final</label>
+            <button class="btn btn-secondary" id="btn-ai-generate-summary" onclick="window.SessionEngine.generateAISessionSummary()" style="padding:2px 8px; font-size:0.7rem;">🤖 Générer par l'IA</button>
+          </div>
+          <textarea id="close-session-summary" rows="5" required placeholder="Racontez le récit de la séance..."></textarea>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; align-items:flex-end;">
+          <div class="form-group">
+            <label>Durée de la séance</label>
+            <input type="text" id="close-session-duree" placeholder="Ex: 3h">
+          </div>
+          <button class="btn btn-primary" onclick="window.handleConfirmCloseSession()" style="padding:10px;">Confirmer la Clôture</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Sélection de Cible (Target Picker) -->
+  <div class="detail-modal" id="target-picker-modal">
+    <div class="glass-panel" id="target-picker-content" style="width:90%; max-width:540px; max-height:85vh; overflow-y:auto; padding:24px; display:flex; flex-direction:column; gap:16px; border-radius:16px; border:1px solid rgba(255,95,95,0.35); box-shadow:0 0 40px rgba(255,80,80,0.15);">
+      
+      <!-- Header -->
+      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(255,95,95,0.25); padding-bottom:12px;">
+        <div>
+          <div style="font-family:var(--font-title); font-size:1.1rem; font-weight:700; color:#fff;" id="target-picker-title">🎯 Choisir une Cible</div>
+          <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;" id="target-picker-subtitle">Sélectionnez le combattant ciblé</div>
+        </div>
+        <button class="btn" onclick="window.CharacterEngine.closeTargetPicker()" style="padding:4px 10px; font-size:0.9rem; color:var(--text-muted);">✕</button>
+      </div>
+
+      <!-- Action badge -->
+      <div id="target-picker-action-badge" style="display:none; padding:6px 12px; border-radius:6px; font-size:0.75rem; font-weight:600; background:rgba(157,78,221,0.15); border:1px solid rgba(157,78,221,0.3); color:#dfb2ff; text-align:center;"></div>
+
+      <!-- No combat warning -->
+      <div id="target-picker-no-combat" style="display:none; text-align:center; padding:20px; color:var(--text-muted); font-size:0.85rem;">
+        <div style="font-size:2rem; margin-bottom:8px;">⚠️</div>
+        <div>Aucun combat actif.</div>
+        <div style="font-size:0.75rem; margin-top:4px;">Démarrez un combat pour sélectionner des cibles.</div>
+      </div>
+
+      <!-- Combatant Cards Grid -->
+      <div id="target-picker-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+        <!-- Populated dynamically -->
+      </div>
+
+      <!-- Cancel -->
+      <button class="btn btn-secondary" onclick="window.CharacterEngine.closeTargetPicker()" style="padding:8px; font-size:0.8rem; margin-top:4px;">Annuler</button>
+    </div>
+  </div>
+
+  <!-- Engines and Orchestrator scripts -->
+  <script src="js/ModalEngine.js"></script>
+  <script src="js/RulesEngine.js"></script>
+  <script src="js/CampaignEngine.js"></script>
+  <script src="js/MediaEngine.js"></script>
+  <script src="js/WorldEngine.js"></script>
+  <script src="js/CharacterEngine.js"></script>
+  <script src="js/SessionEngine.js"></script>
+  <script src="js/EventEngine.js"></script>
+  <script src="js/SkillsEngine.js"></script>
+  <script src="js/AIAssistantEngine.js"></script>
+  <script src="js/ContextMapEngine.js"></script>
+  <script src="js/ArchiveEngine.js"></script>
+  <script src="js/SettingsEngine.js"></script>
+  <script src="js/CombatEngine.js"></script>
+  <script src="js/IconPickerEngine.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>

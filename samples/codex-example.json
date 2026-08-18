@@ -1,0 +1,754 @@
+{
+  "campagne": {
+    "id": "camp1",
+    "titre": "Les Brumes de Valdras",
+    "description": "Au cœur d'une région oubliée, le village de Brumeval est un lieu où le temps semble s'être figé. Étreint par une brume éternelle et surnaturelle, il est coupé du monde extérieur, ses habitants vivant dans une anxiété palpable. Cette brume, plus qu'un simple phénomène météorologique, est une entité vivante, une présence oppressante qui murmure des secrets oubliés et déforme la réalité, rendant les chemins incertains et les esprits fragiles. Les légendes locales racontent qu'elle est le souffle d'une ancienne malédiction ou le linceul d'un dieu endormi.\n\nLes aventuriers se retrouvent piégés dans ce lieu énigmatique, attirés par des rumeurs de disparitions mystérieuses et d'étranges phénomènes. Ils devront naviguer entre la méfiance des villageois, les machinations d'un maire corrompu et les dangers invisibles tapis dans le brouillard. Chaque pas les enfoncera plus profondément dans un réseau de complots, de trahisons et de forces occultes qui menacent de consumer Brumeval et, potentiellement, le monde au-delà de ses frontières brumeuses.\n\nCette campagne est une plongée dans l'horreur gothique et le mystère, où la survie dépendra autant de l'ingéniosité et de la prudence que de la force brute. Les Brumes de Valdras promettent une aventure sombre et immersive, où la vérité est aussi insaisissable que le brouillard lui-même.",
+    "langue": "fr-FR",
+    "auteur": "MJ Antoine",
+    "dateDebut": "2026-01-10",
+    "version": "1.0.0",
+    "modules": [
+      "PNJ",
+      "Sessions",
+      "Secrets",
+      "Cartes",
+      "Images",
+      "Preparation",
+      "Combat"
+    ],
+    "univers": {
+      "nom": "Valdras et la Brume Éternelle",
+      "histoire": "L'histoire de Valdras est marquée par l'avènement de la Brume, un phénomène qui a commencé il y a environ deux siècles. Avant cela, Valdras était une région fertile et prospère, connue pour ses mines d'argent et ses forêts luxuriantes. Cependant, une série d'événements cataclysmiques – des tremblements de terre, des épidémies et des récoltes désastreuses – ont culminé avec l'apparition d'une brume épaisse et persistante qui a englouti le village de Brumeval et ses environs. Les savants et les mages de l'époque ont tenté d'en percer le mystère, mais tous leurs efforts furent vains. Certains parlent d'une expérience magique qui a mal tourné dans les profondeurs de la Mine de Montval, d'autres d'une ancienne entité cosmique qui s'est éveillée sous la terre, ou encore d'une malédiction divine jetée sur la région pour un péché oublié.\n\nLa Brume a non seulement isolé Brumeval, mais elle a aussi altéré la faune et la flore, créé des illusions et affaibli la volonté des habitants. Les rares tentatives de colonisation ou de commerce ont échoué, les voyageurs se perdant ou devenant fous. La région est devenue un mythe, un lieu à éviter à tout prix. Seuls les plus désespérés ou les plus curieux osent s'aventurer dans ses confins. La Brume de Valdras n'est pas statique; elle semble parfois s'épaissir, d'autres fois se retirer légèrement, comme si elle respirait, révélant et cachant des secrets à sa guise.",
+      "geopolitique": "Valdras est une enclave isolée, ignorée par les royaumes voisins qui la considèrent comme perdue. Le pouvoir est fragmenté : le maire de Brumeval tente de maintenir un semblant d'ordre, mais son autorité est minée par la peur et la corruption. Les bandits de Montval, sous la houlette du Capitaine Thorod, exploitent le chaos pour leur propre profit, agissant comme une force de l'ombre. Des cultes secrets pourraient également exister, cherchant à comprendre ou à manipuler la Brume. Les rares contacts avec l'extérieur se font par des contrebandiers audacieux ou des aventuriers téméraires, mais ces liens sont ténus et dangereux.",
+      "cosmologie": "Dans l'univers de Valdras, les dieux sont lointains et silencieux. La Brume elle-même est devenue une sorte de divinité locale, une force primordiale qui défie la compréhension. Certains murmurent que la Brume est une manifestation du 'Grand Dormeur', une entité cosmique qui sommeille sous la terre et dont les rêves et les cauchemars se matérialisent dans le brouillard. La magie est rare et souvent pervertie par l'influence de la Brume, prenant des formes étranges et imprévisibles. Les rituels anciens et les protections runiques sont les seuls remparts connus contre ses effets les plus néfastes.",
+      "reglesMagiques": "La magie à Valdras est instable. Les sorts peuvent avoir des effets secondaires inattendus, être amplifiés ou déformés par la Brume. Les incantations peuvent attirer l'attention d'entités éthérées. Certains mages ont développé une 'magie de la Brume', utilisant ses énergies pour des sorts d'illusion, de dissimulation ou de manipulation mentale, mais cela vient souvent avec un coût personnel, comme la perte progressive de la mémoire ou de la raison."
+    }
+  },
+  "chapitres": [
+    {
+      "id": "chap1",
+      "titre": "Prologue à Brumeval",
+      "description": "Le premier chapitre plonge les personnages au cœur de l'ambiance oppressante de Brumeval. Leur arrivée est marquée par la rencontre avec les habitants méfiants et les premiers signes de la Brume : des illusions fugaces, des bruits étranges et une sensation constante d'être observé. L'objectif est de les familiariser avec les lieux principaux du village – la Taverne du Corbeau, la Forge, le Manoir du Maire – et de les confronter aux premières rumeurs de disparitions. Le chapitre culmine avec une embuscade nocturne, révélant que les dangers ne viennent pas seulement de la Brume, mais aussi de forces humaines organisées, et que le maire pourrait être impliqué dans des affaires louches. Les PJ découvriront une note énigmatique, pointant vers la Mine de Montval comme source de secrets et de dangers.",
+      "sessions": [
+        "seance1",
+        "seance2"
+      ]
+    },
+    {
+      "id": "chap2",
+      "titre": "La Mine hantée",
+      "description": "Ce chapitre mène les aventuriers dans les entrailles sombres et humides de la Mine de Montval, un lieu maudit où la Brume semble encore plus dense et maléfique. L'exploration de la mine sera une épreuve de survie, confrontant les PJ à des pièges oubliés, des créatures mutées par la Brume et les esprits tourmentés des mineurs décédés. L'ambiance claustrophobe et l'obscurité quasi totale mettront leurs nerfs à rude épreuve. Au-delà des dangers physiques, la mine recèle des preuves tangibles du pacte corrompu entre le maire Valérien et le Capitaine Thorod, ainsi que des indices sur l'origine de la Brume elle-même. Les rebondissements incluront la découverte d'un autel secret ou d'une chambre scellée, suggérant que la mine est bien plus qu'une simple exploitation minière abandonnée, mais un lieu de rituels anciens ou de confinement d'une entité.",
+      "sessions": [
+        "seance3"
+      ]
+    },
+    {
+      "id": "chap3",
+      "titre": "Le Cœur de la Brume",
+      "description": "Après les révélations de la mine, les PJ doivent affronter les conséquences de leurs découvertes. Ce chapitre se concentrera sur la confrontation avec le maire Valérien et la bande de Thorod, mais aussi sur l'approfondissement du mystère de la Brume. Les PJ pourraient découvrir un culte secret au sein du village, cherchant à apaiser ou à contrôler la Brume, ou une source d'énergie arcanique qui l'alimente. L'enjeu sera de déjouer les plans du maire et des bandits, tout en cherchant un moyen de comprendre et peut-être de dissiper la Brume qui étouffe Brumeval. Ce chapitre pourrait inclure des enquêtes plus poussées, des alliances inattendues avec des PNJ insoupçonnés, et des choix moraux difficiles quant au destin du village.",
+      "sessions": []
+    },
+    {
+      "id": "chap4",
+      "titre": "L'Éveil du Grand Dormeur",
+      "description": "Le chapitre final révèle la véritable nature de la Brume et la menace qu'elle représente. Les PJ découvriront que la Brume est liée à une entité cosmique, le 'Grand Dormeur', qui menace de s'éveiller complètement, plongeant Valdras et potentiellement le monde entier dans une folie éternelle. Ils devront trouver un moyen de l'arrêter, que ce soit en le renvoyant à son sommeil, en le détruisant, ou en scellant la source de son pouvoir. Ce chapitre sera une course contre la montre, avec des enjeux planétaires, des révélations finales sur l'histoire de Valdras et des sacrifices inévitables. Le climax se déroulera dans un lieu caché, peut-être sous la mine ou dans un temple oublié au cœur de la Brume la plus dense.",
+      "sessions": []
+    }
+  ],
+  "seances": [
+    {
+      "id": "seance1",
+      "date": "2026-01-10",
+      "titre": "Arrivée à Brumeval",
+      "duree": "3h",
+      "chapitreId": "chap1",
+      "lieu": "Taverne",
+      "personnages": [
+        "PJ1",
+        "PJ2"
+      ],
+      "evenements": [
+        "evenement1",
+        "evenement2"
+      ],
+      "combats": [],
+      "secretsReveles": [],
+      "resume": "Les PJ arrivent au village et font halte à la Taverne du Corbeau. Ils rencontrent l'aubergiste Eldric qui leur parle des disparitions mystérieuses dans la région, notamment celle de la famille du vieux fermier Garius. Une ambiance lourde et méfiante règne parmi les villageois."
+    },
+    {
+      "id": "seance2",
+      "date": "2026-01-17",
+      "titre": "Embuscade nocturne",
+      "duree": "2h30",
+      "chapitreId": "chap1",
+      "lieu": "Brumeval",
+      "personnages": [
+        "PJ1",
+        "PJ2"
+      ],
+      "evenements": [
+        "evenement3"
+      ],
+      "combats": [
+        "combat1"
+      ],
+      "secretsReveles": [
+        "secret1"
+      ],
+      "resume": "Les PJ sont attaqués de nuit par des bandits affiliés à la bande de Montval alors qu'ils traversent la rue principale. Après un combat acharné, ils découvrent sur l'un des assaillants une note mentionnant que la mine hantée recèle un secret lié au maire et une cargaison à récupérer. La mine semble être la clé de bien des mystères."
+    },
+    {
+      "id": "seance3",
+      "date": "2026-01-24",
+      "titre": "Dans la gueule du loup",
+      "duree": "4h",
+      "chapitreId": "chap2",
+      "lieu": "Mine",
+      "personnages": [
+        "PJ1",
+        "PJ2"
+      ],
+      "evenements": [
+        "evenement4",
+        "evenement5"
+      ],
+      "combats": [],
+      "secretsReveles": [
+        "secret2",
+        "secret3"
+      ],
+      "resume": "Les PJ explorent les galeries sombres et dangereuses de la mine de Montval. Ils sont confrontés à des esprits en colère, vestiges des mineurs morts lors de l'éboulement. Au plus profond, ils découvrent une cache secrète renfermant un registre de comptes prouvant le pacte entre le maire et le chef des bandits, ainsi qu'une étrange amulette en obsidienne qui semble réagir à la Brume."
+    }
+  ],
+  "lieux": [
+    {
+      "id": "Brumeval",
+      "nom": "Village de Brumeval",
+      "type": "village",
+      "description": "Un hameau isolé, aux toits de chaume noircis par l'humidité, constamment cerné par un brouillard épais et persistant. Les rues sont étroites et boueuses, les maisons s'accrochent les unes aux autres comme pour se protéger de l'extérieur. L'air y est lourd, imprégné d'une odeur de terre humide, de bois fumé et d'une pointe métallique indéfinissable. Des murmures semblent flotter dans la brume, parfois des formes indistinctes apparaissent et disparaissent. Les habitants se déplacent avec prudence, les regards fuyants, et les portes se ferment rapidement au passage des étrangers. Une vieille légende raconte que le village fut bâti sur un ancien site druidique, et que la Brume est la manifestation d'une entité gardienne perturbée par l'avidité des mineurs d'antan.",
+      "images": [
+        "imgBrumeval"
+      ],
+      "relations": []
+    },
+    {
+      "id": "Taverne",
+      "nom": "La Taverne du Corbeau",
+      "type": "taverne",
+      "description": "Au cœur de Brumeval, la Taverne du Corbeau est un refuge chaleureux mais enfumé, l'un des rares lieux où les villageois se réunissent pour oublier la brume et la morosité ambiante. L'intérieur est sombre, éclairé par des lanternes à l'huile et un grand foyer crépitant. L'odeur de bière éventée, de ragoût de gibier et de tabac âcre emplit la pièce. Les tables en bois massif sont usées par le temps, et les conversations sont souvent chuchotées, empreintes de rumeurs et de superstitions. C'est le centre névralgique des informations locales, où l'on peut glaner des indices sur les disparitions ou les étranges phénomènes qui frappent le village. Les murs sont ornés de têtes de gibier empaillées et de vieilles cartes jaunies de régions lointaines, rappelant un monde extérieur presque oublié.",
+      "images": [
+        "imgTaverne"
+      ],
+      "relations": []
+    },
+    {
+      "id": "Forge",
+      "nom": "La Forge d'André",
+      "type": "atelier",
+      "description": "Située à l'écart du centre du village, la Forge d'André est une bâtisse robuste en pierre et bois, d'où résonnent des bruits d'enclume jour et nuit, un son rassurant dans le silence oppressant de la Brume. L'air y est chaud et chargé de l'odeur du charbon et du métal chauffé. Des étincelles volent dans l'obscurité, illuminant les muscles saillants d'André. C'est un lieu de travail acharné, mais aussi un point de ralliement officieux pour ceux qui se méfient du maire. André y fabrique des outils agricoles essentiels, mais aussi, en secret, des armes plus rudimentaires pour une milice villageoise informelle, prête à se défendre contre les bandits ou des menaces plus insidieuses venues de la Brume. L'histoire raconte que la forge a été construite sur un ancien puits d'eau souterraine, ce qui lui confère une résistance particulière aux influences de la Brume.",
+      "images": [
+        "imgForge"
+      ],
+      "relations": []
+    },
+    {
+      "id": "Mine",
+      "nom": "La Mine de Montval",
+      "type": "ruine",
+      "description": "Perdue dans la brume à quelques lieues de Brumeval, la Mine de Montval est une ancienne mine d'argent abandonnée il y a dix ans après un éboulement tragique qui coûta la vie à de nombreux mineurs. Son entrée, un gouffre sombre et béant, est entourée de structures de bois pourries et de rails rouillés. L'air y est froid, lourd et imprégné d'une odeur de moisissure et de minéraux. Des légendes locales racontent que les esprits des mineurs morts hantent toujours les galeries, cherchant vengeance ou repos. Certains murmurent que l'éboulement n'était pas accidentel, mais le résultat d'une force obscure libérée des profondeurs. La mine est également connue pour ses gisements d'obsidienne, une pierre noire et vitreuse que certains disent avoir des propriétés mystiques, capable d'absorber ou de refléter la magie. C'est un lieu de danger, de mystère et de secrets enfouis, bien plus qu'une simple ruine.",
+      "images": [
+        "imgMine"
+      ],
+      "relations": []
+    },
+    {
+      "id": "ManoirMaire",
+      "nom": "Manoir du Maire",
+      "type": "manoir",
+      "description": "Le Manoir du Maire Valérien est la plus grande et la plus imposante bâtisse de Brumeval, bien que son faste d'antan soit désormais terni par la brume et le manque d'entretien. Situé sur une petite colline surplombant le village, il est entouré d'un mur de pierre délabré et d'un jardin envahi par les ronces. Les fenêtres, souvent sombres, semblent observer le village avec une froideur distante. L'intérieur est luxueux mais poussiéreux, rempli de meubles anciens et de tapisseries délavées, témoins d'une richesse passée. Des couloirs labyrinthiques et des pièces rarement utilisées ajoutent à l'atmosphère oppressante. On dit que le manoir possède des passages secrets et des caves profondes, vestiges de l'ancienne famille noble qui l'habitait, et que Valérien y cache de sombres secrets.",
+      "images": [
+        "imgManoirMaire"
+      ],
+      "relations": []
+    },
+    {
+      "id": "CerclePierres",
+      "nom": "Cercle de Pierres Anciennes",
+      "type": "site_rituel",
+      "description": "Au-delà des limites de Brumeval, profondément enfoui dans la brume la plus dense, se trouve un ancien cercle de monolithes massifs, couverts de lichens et de runes effacées par le temps. Ce lieu dégage une aura étrange, une énergie primordiale qui semble vibrer dans l'air. Les légendes racontent que c'est ici que la Brume a pris naissance, ou que c'est un point de convergence entre les mondes. Des rituels y étaient pratiqués par les anciens druides de Valdras pour communiquer avec les esprits de la terre, et certains murmurent que des cultistes modernes tentent d'y réveiller quelque chose d'endormi. La visibilité y est presque nulle, et le silence est parfois brisé par des chuchotements inintelligibles ou des chants éthérés.",
+      "images": [
+        "imgCerclePierres"
+      ],
+      "relations": []
+    }
+  ],
+  "pnjs": [
+    {
+      "id": "Eldric",
+      "nom": "Eldric l'aubergiste",
+      "role": "Aubergiste de la Taverne du Corbeau",
+      "description": "Eldric est un homme corpulent à la barbe poivre et sel, le visage marqué par les soucis mais éclairé par un sourire jovial, bien que souvent forcé. Ses yeux bleus, vifs et observateurs, ont vu passer bien des voyageurs et des drames. Il est le cœur battant de la Taverne du Corbeau, toujours prêt à servir une pinte et à écouter les histoires, ou à en raconter lui-même. Cependant, derrière sa bonhomie se cache une profonde fatigue et une méfiance grandissante envers le maire Valérien, qu'il soupçonne de malversations. Eldric est un puits de rumeurs et de légendes locales, connaissant les secrets du village mieux que quiconque, mais il est prudent et ne révèle ses informations qu'à ceux en qui il a confiance. Il a un tic de comportement : il nettoie constamment le comptoir avec un chiffon, même s'il est déjà impeccable, signe de sa nervosité sous-jacente.",
+      "faction": "F1",
+      "image": "imgEldric",
+      "relations": [
+        {
+          "cible": "Maire",
+          "type": "mefiance",
+          "valeur": -1
+        },
+        {
+          "cible": "Forgeron",
+          "type": "ami",
+          "valeur": 1
+        }
+      ]
+    },
+    {
+      "id": "Maire",
+      "nom": "Maire de Brumeval (Valérien)",
+      "role": "Maire du village",
+      "description": "Valérien est un homme d'une cinquantaine d'années, autrefois un noble déchu ayant trouvé refuge à Brumeval. Il porte des vêtements coûteux mais légèrement défraîchis, signe d'une fortune en déclin. Son visage est pâle, ses traits tirés, et il évite le regard direct, préférant fixer un point au-delà de son interlocuteur. Il est constamment nerveux, se frottant les mains ou ajustant sa cravate. Sa psychologie est celle d'un homme piégé par ses propres erreurs et par des forces qu'il ne contrôle plus. Il a fait un pacte désespéré avec les bandits de Montval pour maintenir un semblant d'ordre et de sécurité, tout en s'assurant une part de leurs butins. Il est rongé par la peur d'être découvert et par la culpabilité, mais son instinct de survie est plus fort. Il rêve de restaurer la gloire de sa famille et voit dans la Brume une opportunité, plutôt qu'une menace, si seulement il pouvait la contrôler. Son tic est de tousser discrètement, comme pour masquer un mensonge ou une gêne.",
+      "faction": "F1",
+      "image": "imgMaire",
+      "relations": [
+        {
+          "cible": "Eldric",
+          "type": "froideur",
+          "valeur": 0
+        },
+        {
+          "cible": "CapitaineBandits",
+          "type": "complice",
+          "valeur": 2
+        }
+      ]
+    },
+    {
+      "id": "Forgeron",
+      "nom": "André le Forgeron",
+      "role": "Forgeron local",
+      "description": "André est un colosse silencieux, dont la carrure imposante et les bras musclés témoignent d'années de travail acharné. Sa barbe rousse est parsemée de mèches grises, et ses yeux bleus perçants semblent toujours observer avec une gravité tranquille. Il parle peu, préférant laisser ses actions parler pour lui. C'est un homme d'honneur et de principes, loyal envers les habitants de Brumeval, mais profondément méfiant envers l'autorité du maire Valérien, qu'il juge faible et corrompue. En plus de forger des outils agricoles, il fabrique secrètement des armes pour ceux qui osent s'opposer aux bandits. Il a une histoire tragique : sa famille a disparu dans la Brume il y a des années, ce qui a renforcé sa détermination à protéger les siens. Son tic est de serrer et desserrer son poing, comme s'il était toujours prêt à l'action.",
+      "faction": "F1",
+      "image": "imgForge",
+      "relations": [
+        {
+          "cible": "Maire",
+          "type": "mefiance",
+          "valeur": -2
+        },
+        {
+          "cible": "Eldric",
+          "type": "ami",
+          "valeur": 1
+        }
+      ]
+    },
+    {
+      "id": "CapitaineBandits",
+      "nom": "Capitaine Thorod",
+      "role": "Chef de la bande de Montval",
+      "description": "Le Capitaine Thorod est un mercenaire balafré, dont le visage est une carte de ses batailles passées. Une cicatrice profonde traverse son œil gauche, lui donnant un regard perçant et impitoyable. C'est un homme sans scrupule, motivé par l'argent et le pouvoir, recherché dans toute la province pour ses exactions. Il est charismatique à sa manière, capable d'inspirer la loyauté (par la peur) à sa bande de pillards. Il voit Brumeval comme une vache à lait, facile à exploiter grâce à la faiblesse du maire et à l'isolement du village. Il est intelligent et calculateur, ne laissant rien au hasard. Sa psychologie est celle d'un prédateur, toujours à la recherche de la prochaine proie. Il a un rire rauque et sarcastique, qu'il utilise pour intimider ou montrer son mépris. Il porte toujours une dague finement ouvragée à sa ceinture, qu'il manipule avec une dextérité inquiétante.",
+      "faction": "F2",
+      "image": "imgThorod",
+      "relations": [
+        {
+          "cible": "Maire",
+          "type": "complice",
+          "valeur": 2
+        }
+      ]
+    },
+    {
+      "id": "Garius",
+      "nom": "Garius le Fermier",
+      "role": "Vieux fermier de Brumeval",
+      "description": "Garius est un vieil homme courbé par l'âge et le travail, dont le visage ridé est un témoignage des dures réalités de la vie à Brumeval. Ses yeux, autrefois vifs, sont maintenant empreints d'une tristesse profonde depuis la disparition de sa famille dans la Brume. Il est devenu reclus et méfiant, mais il détient des connaissances précieuses sur les sentiers oubliés et les légendes anciennes du village. Il a un tic de comportement : il marmonne souvent pour lui-même, des fragments de prières ou de vieilles chansons, comme pour conjurer la solitude. Il pourrait être une source d'information inattendue pour les PJ, s'ils parviennent à gagner sa confiance.",
+      "faction": "F1",
+      "image": "imgGarius",
+      "relations": []
+    },
+    {
+      "id": "SoeurAgnes",
+      "nom": "Sœur Agnès",
+      "role": "Guérisseuse et sage-femme",
+      "description": "Sœur Agnès est une femme d'âge mûr, au regard doux mais ferme. Elle est la guérisseuse et sage-femme de Brumeval, respectée de tous pour sa gentillesse et son savoir en herboristerie. Elle est l'une des rares à ne pas être entièrement consumée par la peur de la Brume, bien qu'elle en reconnaisse les dangers. Elle croit en la bonté inhérente des gens et tente d'apporter un peu de lumière dans ce monde sombre. Elle a un tic de comportement : elle touche souvent le petit médaillon qu'elle porte autour du cou, un symbole de sa foi et de son espoir. Elle pourrait offrir des soins aux PJ et des conseils spirituels, mais aussi les avertir des dangers occultes de la Brume.",
+      "faction": "F1",
+      "image": "imgSoeurAgnes",
+      "relations": []
+    }
+  ],
+  "joueurs": [
+    {
+      "id": "J1",
+      "nom": "Alice",
+      "personnages": [
+        "PJ1"
+      ]
+    },
+    {
+      "id": "J2",
+      "nom": "Bob",
+      "personnages": [
+        "PJ2"
+      ]
+    }
+  ],
+  "personnages": [
+    {
+      "id": "PJ1",
+      "nom": "Anya l'éclaireuse",
+      "joueurId": "J1",
+      "classe": "Rôdeuse",
+      "niveau": 3,
+      "pointsVie": 25,
+      "inventaire": [
+        "I2",
+        "I3"
+      ],
+      "image": "imgAnya"
+    },
+    {
+      "id": "PJ2",
+      "nom": "Galdor le Guerrier",
+      "joueurId": "J2",
+      "classe": "Guerrier",
+      "niveau": 3,
+      "pointsVie": 30,
+      "inventaire": [
+        "I1"
+      ],
+      "image": "imgGaldor"
+    }
+  ],
+  "objets": [
+    {
+      "id": "I1",
+      "nom": "Épée longue enchantée",
+      "type": "arme",
+      "description": "Une épée dont la lame, forgée dans un acier sombre et ancien, luit d'un éclat bleuté et éthéré en présence de morts-vivants ou d'énergies nécromantiques. Son pommeau est orné d'une gemme d'obsidienne polie. Elle fut jadis l'arme d'un chevalier ayant combattu les premières manifestations de la Brume. (+1 aux jets d'attaque, inflige 1d4 dégâts radiants supplémentaires aux morts-vivants).",
+      "possesseur": "PJ2",
+      "image": "imgEpee"
+    },
+    {
+      "id": "I2",
+      "nom": "Carte du Montval",
+      "type": "document",
+      "description": "Un parchemin jauni et usé par le temps, décrivant les sentiers sinueux menant à la mine d'argent de Montval. Des annotations manuscrites, à l'encre délavée, indiquent des points d'eau, des refuges et des zones dangereuses. Elle semble avoir été dessinée par un ancien mineur ou un éclaireur expérimenté, bien avant que la Brume n'engloutisse la région. Certaines marques semblent indiquer des passages secrets ou des zones instables.",
+      "possesseur": "PJ1",
+      "image": "imgCarte"
+    },
+    {
+      "id": "I3",
+      "nom": "Amulette de protection",
+      "type": "amulette",
+      "description": "Une petite amulette en argent terni, gravée d'une rune de protection ancienne et d'un symbole représentant un œil stylisé. Elle dégage une légère chaleur au toucher et semble repousser les sensations d'oppression de la Brume. Elle fut transmise de génération en génération dans la famille d'Anya, censée la protéger des influences maléfiques. Elle confère un léger avantage aux jets de sauvegarde contre les effets de peur et de confusion.",
+      "possesseur": "PJ1",
+      "image": "imgAmulette"
+    },
+    {
+      "id": "I4",
+      "nom": "Registre des comptes du Maire",
+      "type": "document",
+      "description": "Un lourd registre en cuir noir, dissimulé dans la mine. Ses pages détaillent des transactions financières douteuses, des paiements à la 'Bande du Corbeau' (un nom de code pour les bandits de Montval) et des listes de 'cargaisons' qui correspondent étrangement aux biens disparus des fermes de Brumeval. Il contient également des notes cryptiques sur des 'livraisons spéciales' et des 'rituels d'apaisement' pour la Brume, signées de la main du maire Valérien.",
+      "possesseur": "",
+      "image": "imgRegistre"
+    },
+    {
+      "id": "I5",
+      "nom": "Clé en Obsidienne",
+      "type": "clef",
+      "description": "Une clé étrange, taillée dans un bloc d'obsidienne noire et polie, dont la surface réfléchit la lumière d'une manière inquiétante. Elle est froide au toucher et semble vibrer légèrement en présence de la Brume. Elle ne ressemble à aucune clé connue et pourrait ouvrir un passage secret ou une chambre scellée dans la mine, ou même un artefact lié à l'origine de la Brume.",
+      "possesseur": "",
+      "image": "imgCleObsidienne"
+    }
+  ],
+  "factions": [
+    {
+      "id": "F1",
+      "nom": "Habitants de Brumeval",
+      "description": "Les villageois de Brumeval sont un peuple résilient mais fatigué, qui essaie de survivre sous la menace constante de la Brume et des bandits. Leur alignement penche vers le neutre, cherchant avant tout la sécurité et la paix, mais la peur et la méfiance les rendent parfois hostiles aux étrangers. Leur histoire est celle d'une communauté isolée, forcée de s'adapter à un environnement hostile, où la solidarité est mise à l'épreuve par la survie individuelle. Leurs buts sont simples : protéger leurs familles, cultiver leurs terres (malgré la Brume) et espérer un jour voir le soleil.",
+      "alignment": "neutre",
+      "membres": [
+        "Eldric",
+        "Maire",
+        "Forgeron",
+        "Garius",
+        "SoeurAgnes"
+      ]
+    },
+    {
+      "id": "F2",
+      "nom": "Bandits de Montval",
+      "description": "Une bande de pillards organisés, menée par le Capitaine Thorod, qui opère dans les environs de Brumeval et sur les routes menant à la mine. Ils sont connus pour leur brutalité et leur efficacité. Leur alignement est chaotique mauvais, cherchant le profit à tout prix, sans considération pour la vie humaine. Leur historique est celui d'anciens mercenaires et criminels qui ont trouvé un refuge et une opportunité d'affaires dans la région isolée de Valdras. Leurs buts sont l'enrichissement personnel, le contrôle des routes commerciales (même si elles sont rares) et l'exploitation des faiblesses des villages locaux, y compris Brumeval.",
+      "alignment": "chaotique mauvais",
+      "membres": [
+        "CapitaineBandits"
+      ]
+    },
+    {
+      "id": "F3",
+      "nom": "Le Culte du Grand Dormeur",
+      "description": "Une faction secrète et insidieuse, composée de quelques villageois égarés et d'étrangers attirés par le pouvoir de la Brume. Ils croient que la Brume est la manifestation d'une entité cosmique endormie, le 'Grand Dormeur', et cherchent à l'éveiller ou à la manipuler pour obtenir un pouvoir indicible. Leur alignement est chaotique mauvais, car leurs rituels sont souvent sanglants et leurs objectifs sont égoïstes et destructeurs. Leur historique est flou, mais des murmures parlent de leur présence depuis des décennies, se cachant dans l'ombre et recrutant des âmes désespérées. Leurs buts sont d'accéder à la connaissance interdite, de maîtriser la Brume et de remodeler le monde selon la volonté du Grand Dormeur.",
+      "alignment": "chaotique mauvais",
+      "membres": []
+    }
+  ],
+  "secrets": [
+    {
+      "id": "secret1",
+      "titre": "La Mine hantée",
+      "decouverte": true,
+      "description": "La mine abandonnée abrite en réalité les esprits tourmentés des mineurs morts lors d'un éboulement provoqué. Ces esprits sont liés à la Brume et réagissent violemment à toute intrusion, cherchant à se venger de ceux qui les ont condamnés à cette damnation éternelle. Ils sont également les gardiens involontaires d'un secret plus profond au sein de la mine.",
+      "participants": [
+        "PJ1",
+        "PJ2"
+      ]
+    },
+    {
+      "id": "secret2",
+      "titre": "Pacte occulte du maire",
+      "decouverte": true,
+      "description": "Le maire Valérien finance secrètement les bandits de Montval en échange d'une protection pour le village (et pour lui-même) et d'une part de leur butin. Ce pacte est une tentative désespérée de maintenir l'ordre et sa position, mais il le lie à des criminels et le rend complice de leurs exactions. Le registre trouvé dans la mine en est la preuve irréfutable.",
+      "participants": [
+        "PJ1",
+        "PJ2"
+      ]
+    },
+    {
+      "id": "secret3",
+      "titre": "L'origine de la Brume",
+      "decouverte": false,
+      "description": "La Brume n'est pas un phénomène naturel, mais la manifestation d'une entité cosmique endormie, le 'Grand Dormeur', qui repose sous la Mine de Montval. Son éveil a été provoqué par l'exploitation minière intensive, et la Brume est son souffle, ses rêves et ses cauchemars prenant forme. Certains villageois, membres d'un culte secret, cherchent à l'éveiller complètement.",
+      "participants": []
+    },
+    {
+      "id": "secret4",
+      "titre": "Le passé du Forgeron",
+      "decouverte": false,
+      "description": "André le Forgeron a perdu sa famille dans la Brume il y a des années. Il soupçonne le maire d'être impliqué dans ces disparitions, ou du moins de ne pas avoir agi. Cette tragédie alimente sa haine des bandits et sa méfiance envers l'autorité, le poussant à préparer secrètement une résistance armée.",
+      "participants": []
+    },
+    {
+      "id": "secret5",
+      "titre": "Les disparitions de Garius",
+      "decouverte": false,
+      "description": "La famille du vieux fermier Garius n'a pas simplement disparu dans la Brume. Ils ont été enlevés par le Culte du Grand Dormeur, qui les utilise pour des rituels visant à apaiser ou à réveiller l'entité. Garius a des indices, mais la peur l'empêche de les révéler.",
+      "participants": []
+    }
+  ],
+  "evenements": [
+    {
+      "id": "evenement1",
+      "titre": "Halte à la taverne",
+      "description": "Les aventuriers louent des chambres à la Taverne du Corbeau et écoutent les rumeurs locales, notamment celles concernant les disparitions et la méfiance envers le maire. Eldric leur sert de guide initial.",
+      "date": "2026-01-10",
+      "lieu": "Taverne",
+      "personnagesImpliques": [
+        "PJ1",
+        "PJ2",
+        "Eldric"
+      ]
+    },
+    {
+      "id": "evenement2",
+      "titre": "Mise en garde du forgeron",
+      "description": "André le Forgeron, intrigué par les nouveaux venus, conseille à Anya de ne pas traîner dehors la nuit, insinuant que la Brume cache bien plus que des dangers naturels. Il lui offre une petite amulette de fer forgé, censée porter chance.",
+      "date": "2026-01-10",
+      "lieu": "Forge",
+      "personnagesImpliques": [
+        "PJ1",
+        "Forgeron"
+      ]
+    },
+    {
+      "id": "evenement3",
+      "titre": "L'attaque dans la rue",
+      "description": "Deux bandits de Montval agressent le groupe devant la taverne, cherchant à les intimider ou à les voler. Cet événement marque la première confrontation directe avec les forces hostiles du village.",
+      "date": "2026-01-17",
+      "lieu": "Brumeval",
+      "personnagesImpliques": [
+        "PJ1",
+        "PJ2"
+      ]
+    },
+    {
+      "id": "evenement4",
+      "titre": "Découverte de l'épée",
+      "description": "Dans les profondeurs de la Mine de Montval, Galdor trouve une épée enchantée plantée dans un squelette de mineur, comme si elle l'attendait. L'épée réagit à la présence de la Brume, émettant une faible lueur bleue.",
+      "date": "2026-01-24",
+      "lieu": "Mine",
+      "personnagesImpliques": [
+        "PJ2"
+      ]
+    },
+    {
+      "id": "evenement5",
+      "titre": "La preuve du complot",
+      "description": "Anya découvre le registre secret du maire sous une dalle de pierre branlante dans une galerie abandonnée de la mine, révélant son pacte avec les bandits.",
+      "date": "2026-01-24",
+      "lieu": "Mine",
+      "personnagesImpliques": [
+        "PJ1",
+        "PJ2"
+      ]
+    },
+    {
+      "id": "evenement6",
+      "titre": "L'Éboulement de la Mine",
+      "description": "Il y a dix ans, un éboulement majeur a scellé une partie de la Mine de Montval, tuant de nombreux mineurs. Cet événement est officiellement un accident, mais des rumeurs persistent sur une cause surnaturelle ou un sabotage lié à la découverte de quelque chose d'ancien dans les profondeurs.",
+      "date": "2016-03-15",
+      "lieu": "Mine",
+      "personnagesImpliques": [],
+      "type": "historique"
+    },
+    {
+      "id": "evenement7",
+      "titre": "L'Arrivée de la Brume",
+      "description": "Il y a deux siècles, une brume épaisse et persistante a commencé à envelopper Brumeval, coupant le village du reste du monde. Les récoltes ont échoué, les animaux sont devenus fous, et des disparitions ont commencé. Cet événement marque le début de l'isolement de Valdras.",
+      "date": "1826-07-01",
+      "lieu": "Brumeval",
+      "personnagesImpliques": [],
+      "type": "historique"
+    },
+    {
+      "id": "evenement8",
+      "titre": "La Disparition de la Famille Garius",
+      "description": "La famille du vieux fermier Garius a disparu sans laisser de trace il y a quelques mois. Seules quelques empreintes de pas menant vers la Brume ont été trouvées. Cet événement a renforcé la peur et la paranoïa parmi les villageois.",
+      "date": "2025-09-05",
+      "lieu": "Brumeval",
+      "personnagesImpliques": [
+        "Garius"
+      ],
+      "type": "tragédie"
+    }
+  ],
+  "combats": [
+    {
+      "id": "combat1",
+      "titre": "Embuscade des bandits",
+      "date": "2026-01-17",
+      "participants": [
+        "PJ1",
+        "PJ2",
+        "CapitaineBandits"
+      ],
+      "lieu": "Brumeval",
+      "resultat": "Victoire des PJ. Un bandit capturé puis interrogé, révélant l'existence du Capitaine Thorod et la mine comme point de rendez-vous."
+    }
+  ],
+  "images": [
+    {
+      "id": "imgBrumeval",
+      "fichier": "https://picsum.photos/id/1015/800/450",
+      "caption": "Le village de Brumeval dans le brouillard"
+    },
+    {
+      "id": "imgTaverne",
+      "fichier": "https://picsum.photos/id/1068/800/450",
+      "caption": "L'intérieur de la Taverne du Corbeau"
+    },
+    {
+      "id": "imgForge",
+      "fichier": "https://picsum.photos/id/1043/800/450",
+      "caption": "La Forge d'André en pleine activité"
+    },
+    {
+      "id": "imgMine",
+      "fichier": "https://picsum.photos/id/1016/800/450",
+      "caption": "L'entrée sombre de la mine de Montval"
+    },
+    {
+      "id": "imgEldric",
+      "fichier": "https://picsum.photos/id/64/150/150",
+      "caption": "Portrait d'Eldric l'aubergiste"
+    },
+    {
+      "id": "imgMaire",
+      "fichier": "https://picsum.photos/id/91/150/150",
+      "caption": "Portrait du maire Valérien"
+    },
+    {
+      "id": "imgAnya",
+      "fichier": "https://picsum.photos/id/338/150/150",
+      "caption": "Portrait d'Anya"
+    },
+    {
+      "id": "imgGaldor",
+      "fichier": "https://picsum.photos/id/447/150/150",
+      "caption": "Portrait de Galdor"
+    },
+    {
+      "id": "imgEpee",
+      "fichier": "https://picsum.photos/id/201/150/150",
+      "caption": "Épée longue enchantée"
+    },
+    {
+      "id": "imgCarte",
+      "fichier": "https://picsum.photos/id/24/150/150",
+      "caption": "Carte parcheminée"
+    },
+    {
+      "id": "imgThorod",
+      "fichier": "https://picsum.photos/id/357/150/150",
+      "caption": "Portrait du Capitaine Thorod"
+    },
+    {
+      "id": "imgGarius",
+      "fichier": "https://picsum.photos/id/1011/150/150",
+      "caption": "Portrait de Garius le fermier"
+    },
+    {
+      "id": "imgSoeurAgnes",
+      "fichier": "https://picsum.photos/id/1025/150/150",
+      "caption": "Portrait de Sœur Agnès"
+    },
+    {
+      "id": "imgAmulette",
+      "fichier": "https://picsum.photos/id/283/150/150",
+      "caption": "Amulette de protection"
+    },
+    {
+      "id": "imgRegistre",
+      "fichier": "https://picsum.photos/id/1044/150/150",
+      "caption": "Ancien registre de comptes"
+    },
+    {
+      "id": "imgCleObsidienne",
+      "fichier": "https://picsum.photos/id/1054/150/150",
+      "caption": "Clé en obsidienne"
+    },
+    {
+      "id": "imgManoirMaire",
+      "fichier": "https://picsum.photos/id/1070/800/450",
+      "caption": "Le Manoir du Maire dans la brume"
+    },
+    {
+      "id": "imgCerclePierres",
+      "fichier": "https://picsum.photos/id/1080/800/450",
+      "caption": "Cercle de pierres anciennes"
+    }
+  ],
+  "relations": [
+    {
+      "id": "rel1",
+      "source": "Forgeron",
+      "cible": "Maire",
+      "type": "mefiance",
+      "valeur": -2
+    },
+    {
+      "id": "rel2",
+      "source": "Maire",
+      "cible": "CapitaineBandits",
+      "type": "complice",
+      "valeur": 2
+    },
+    {
+      "id": "rel3",
+      "source": "Eldric",
+      "cible": "Maire",
+      "type": "mefiance",
+      "valeur": -1
+    },
+    {
+      "id": "rel4",
+      "source": "Forgeron",
+      "cible": "Eldric",
+      "type": "ami",
+      "valeur": 1
+    },
+    {
+      "id": "rel5",
+      "source": "Garius",
+      "cible": "Maire",
+      "type": "rancoeur",
+      "valeur": -1
+    }
+  ],
+  "theories": [
+    {
+      "id": "th1",
+      "joueurId": "J1",
+      "texte": "Le maire Valérien semble terrorisé, peut-être qu'il est menacé par les bandits de Montval, ou par quelque chose de plus grand encore, lié à la Brume.",
+      "concerne": "Maire"
+    },
+    {
+      "id": "th2",
+      "joueurId": "J2",
+      "texte": "La Brume n'est pas naturelle. Elle semble réagir à nos émotions et aux événements. Y a-t-il une intelligence derrière elle ?",
+      "concerne": "Brumeval"
+    }
+  ],
+  "notes": [
+    {
+      "id": "note1",
+      "date": "2026-01-10",
+      "auteur": "MJ",
+      "texte": "Les PJ ont été extrêmement prudents lors de leur arrivée. Attention à introduire le Capitaine Thorod avec plus de tension lors de la séance 2. Le forgeron André pourrait être un allié précieux s'ils gagnent sa confiance."
+    },
+    {
+      "id": "note2",
+      "date": "2026-01-24",
+      "auteur": "MJ",
+      "texte": "La découverte du registre a bien fait avancer l'intrigue. Les PJ sont maintenant conscients de la corruption du maire. Il faut maintenant les guider vers l'origine surnaturelle de la Brume, peut-être via l'amulette en obsidienne ou des indices laissés par les esprits de la mine."
+    }
+  ],
+  "betes": [
+    {
+      "id": "bete_1",
+      "nom": "Loup des Brumes",
+      "type": "Bête",
+      "taille": "Moyenne",
+      "alignement": "Non-aligné",
+      "ca": 13,
+      "hp": 18,
+      "hpMax": 18,
+      "vitesse": "12 m",
+      "initiative": "+2",
+      "cr": "1",
+      "actions": "Morsure. +4 au toucher, allonge 1,50 m. Dégâts : 7 (2d4 + 2) perforants.",
+      "description": "Un loup aux yeux luminescents altéré par les miasmes surnaturels de la Brume de Valdras."
+    },
+    {
+      "id": "bete_2",
+      "nom": "Ombre rampante",
+      "type": "Mort-vivant",
+      "taille": "Moyenne",
+      "alignement": "Chaotique Mauvais",
+      "ca": 12,
+      "hp": 16,
+      "hpMax": 16,
+      "vitesse": "9 m",
+      "initiative": "+2",
+      "cr": "1/2",
+      "actions": "Toucher affaiblissant. +4 au toucher, allonge 1,50 m. Dégâts : 9 (2d6 + 2) nécrotiques.",
+      "description": "Une silhouette éthérée qui hante les galeries inférieures de la mine de Montval."
+    }
+  ],
+  "exports": {
+    "pdf": true,
+    "markdown": true,
+    "json": true
+  },
+  "settings": {
+    "langue": "fr-FR",
+    "assistanceIA": "discret",
+    "modules": {
+      "PNJ": true,
+      "Sessions": true,
+      "Secrets": true,
+      "Cartes": true,
+      "Images": true,
+      "Preparation": true,
+      "Combat": true
+    },
+    "archivageSeances": 100
+  },
+  "plugins": [
+    {
+      "id": "SoundAmbiancePlugin",
+      "version": "1.0.0",
+      "active": true
+    }
+  ]
+}
