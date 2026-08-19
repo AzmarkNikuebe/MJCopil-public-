@@ -194,6 +194,3 @@ MJ_Copilot_Project/
 ```
 
 ---
-
-## 📜 Licence & Crédits
-Projet développé pour la communauté des Maîtres de Jeu Donjons & Dragons. Libre d'utilisation et d'adaptation.
